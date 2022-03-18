@@ -6,36 +6,36 @@
 # 1.1 Retrieving All Rows and Columns from a Table
 # *: return every column for the table
 select *
-from EMP;
+from emp;
 
 # 1.2 Retrieving a subset of rows from a Table
 # common operators: =, <, >, <=, >=, !, <>
 select *
-from EMP
+from emp
 where DEPTNO = 10;
 
 # 1.3 Finding Rows That Satisfy Multiple Conditions
 # datagrip: Ctrl + Alt + L
 select *
-from EMP
+from emp
 where DEPTNO = 10
    or COMM is not null
    or (SAL <= 2000 and DEPTNO = 20);
 
 # 1.4 Retrieving a Subset of Columns from a Table
 select ENAME, DEPTNO, SAL
-from EMP;
+from emp;
 
 # 1.5 Providing Meaningful Names for Columns
 select SAL as salary, COMM as commission
-from EMP;
+from emp;
 
 # 1.6 Referencing an aliased Column in the WHERE Clause
 # FROM -> WHERE -> SELECT
 select *
 from (
          select SAL as salary, COMM as comission
-         from EMP) x
+         from emp) x
 where salary < 5000;
 
 # 1.7 Concatenating Column Values
@@ -43,7 +43,7 @@ where salary < 5000;
 # + : SQL Server
 # concat: MySQL
 select concat(ENAME, ' WORKS AS A', job) as msg
-from EMP
+from emp
 where DEPTNO = 10;
 
 # 1.8 Using Conditional Logical in a SELECT Statement
@@ -55,7 +55,7 @@ select ENAME,
            when SAL >= 4000 then 'OVERPAID'
            else 'OK'
            end as status
-from EMP;
+from emp;
 
 # 1.9 Limiting the Number of Rows Returned
 # DB2: FETCH FIRST
@@ -63,7 +63,7 @@ from EMP;
 # Oracle: ROWNUM and WHERE
 # SQL Server: TOP
 select *
-from EMP
+from emp
 limit 5;
 
 # 1.10 Returning n Random Records from a Table
@@ -73,26 +73,26 @@ limit 5;
 # Oracle: dbms_random.value()
 # SQL Server: newid()
 select *
-from EMP
+from emp
 order by rand()
 limit 5;
 
 # 1.11 Finding Null Values
 # is null, is not null
 select *
-from EMP
+from emp
 where COMM is null;
 
 
 # 1.12 Transforming Nulls into Real Values
 select coalesce(COMM, 0),
        coalesce(MGR, 7000)
-from EMP;
+from emp;
 
 # 1.13 Searching for Patterns
 # %: matches any sequence of characters
 # _: matches any single character
 select ENAME, JOB
-from EMP
+from emp
 where DEPTNO in (10, 20)
 and (ename like '%I%' or JOB like '%ER');

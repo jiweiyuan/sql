@@ -4,17 +4,17 @@
 # ORDER BY, ASC, DESC
 # From -> WHERE ->  SELECT -> ORDER BY
 select ENAME, JOB, SAL
-from EMP
+from emp
 order by SAL asc;
 
 select ENAME, JOB, SAL
-from EMP
+from emp
 where DEPTNO = 10
 order by SAL desc;
 
 # 2.2 Sorting by Multiple Columns
 select EMPNO, DEPTNO, SAL, ENAME, JOB
-from EMP
+from emp
 order by DEPTNO, SAL desc;
 
 # 2.3 Sorting by Substrings
@@ -22,7 +22,7 @@ order by DEPTNO, SAL desc;
 # DB2,MySQL,Oracle,and PostgreSQL: substr
 # SQL Server: substring
 select ENAME, JOB, SAL, substr(JOB, length(JOB) - 1) as JOB_SUFFIX
-from EMP
+from emp
 order by substr(JOB, length(JOB) - 1);
 
 # 2.4 Sorting Mixed Alphanumeric Data
@@ -30,7 +30,7 @@ order by substr(JOB, length(JOB) - 1);
 create view V
 as
 select concat(ENAME, ' ', DEPTNO) as data
-from EMP;
+from emp;
 
 select * from V;
 
@@ -40,11 +40,11 @@ select * from V;
 
 /* ascending */
 select ENAME, SAL, COMM
-from EMP
+from emp
 order by 3;
 /* descending */
 select ENAME, SAL, COMM
-from EMP
+from emp
 order by 3 desc;
 
 /* NON-NULL COMM SORTED ASCENDING, ALL NULLS LAST */
@@ -57,7 +57,7 @@ from (
                     when COMM is null then 1
                     else 0
                     end as is_null
-         from EMP
+         from emp
      ) as E
 order by is_null, COMM;
 
@@ -72,7 +72,7 @@ from (
                     when COMM is null then 1
                     else 0
                     end as is_null
-         from EMP
+         from emp
          ) as  E
 order by is_null, COMM desc;
 
@@ -86,7 +86,7 @@ from (
                 when COMM is null then 1
                 else 0
                 end as is_null
-    from EMP
+    from emp
          ) as E
 order by is_null desc, COMM;
 
@@ -100,13 +100,13 @@ from (
                 when COMM is null then 1
                 else 0
                 end as is_null
-    from EMP
+    from emp
          ) as E
 order by is_null desc , COMM desc;
 
 # 2.6 Sorting on a Data-Dependent Key
 select ENAME, SAL, JOB, COMM
-from EMP
+from emp
 order by case when JOB = 'SALESMAN' then COMM else SAL end;
 
 select ENAME,
@@ -114,5 +114,5 @@ select ENAME,
        JOB,
        COMM,
        case when JOB = 'SALESMAN' then COMM else SAL end as ordered
-from EMP
+from emp
 order by ordered asc;
