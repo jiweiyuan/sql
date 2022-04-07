@@ -7,14 +7,14 @@ select * from dept limit 1;
 # 3.1 Stacking One Row-set atop Another
 # UNION ALL
 # UNION: no duplicate rows
-select ENAME, DEPTNO
+select ename, deptno
 from emp
-where DEPTNO = 10
+where deptno = 10
 union all
 select '-------------', null
 from T1
 union all
-select DNAME, DEPTNO
+select dname, deptno
 from dept;
 
 
